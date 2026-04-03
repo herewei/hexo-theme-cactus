@@ -67,3 +67,9 @@ comments:
 tooltip:
   copy_tip: 复制到粘贴板！
   copied: 复制成功！
+
+theme:
+  toggle: 切换主题
+  auto: 自动
+  light: 浅色
+  dark: 深色

@@ -67,3 +67,9 @@ comments:
 tooltip:
   copy_tip: Copy to clipboard!
   copied: Copied!
+
+theme:
+  toggle: Toggle theme
+  auto: Auto
+  light: Light
+  dark: Dark
