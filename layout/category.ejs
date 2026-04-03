@@ -1,8 +1,12 @@
 <div id="category-page">
   <div class="category-header">
     <h1 class="category-title">📁 <%= page.category %></h1>
+    <% 
+      var current_lang = get_current_lang()
+      var filtered_posts = filter_posts_by_lang(page.posts, current_lang)
+    %>
     <% if (page.category) { %>
-      <p class="category-count">共 <%= page.posts.length %> 篇文章</p>
+      <p class="category-count">共 <%= filtered_posts.length %> 篇文章</p>
     <% } %>
   </div>
 
@@ -11,12 +15,12 @@
       var year = 0
       var change = false
       // 按 series_order 排序（如果有），然后按日期
-      page.posts.each(function(post) { 
+      filtered_posts.each(function(post) { 
         post.sort_order = post.series_order || 0
       })
-      page.posts.sort('sort_order', 'asc').sort('date', 'desc')
+      filtered_posts.sort('sort_order', 'asc').sort('date', 'desc')
       
-      page.posts.each(function(post) { 
+      filtered_posts.each(function(post) { 
         var itemYear = date(post.date, 'YYYY')
         change = year !== itemYear
         year = change ? itemYear : year

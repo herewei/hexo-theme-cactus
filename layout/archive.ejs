@@ -3,7 +3,8 @@
     <% var year = 0 %>
     <% var change = false %>
     <% var field_sort = theme.archive.sort_updated ? 'updated' : 'date' %>
-    <% page.posts.sort(field_sort, 'desc').each(function(post) { %>
+    <% var current_lang = get_current_lang() %>
+    <% filter_posts_by_lang(page.posts, current_lang).sort(field_sort, 'desc').each(function(post) { %>
       <% var itemYear = date(post[field_sort], 'YYYY') %>
       <% change = year !== itemYear %>
       <% year = change ? itemYear : year %>

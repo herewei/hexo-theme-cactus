@@ -1,15 +1,19 @@
 <div id="tag-page">
   <div class="tag-header">
     <h1 class="tag-title">🏷️ <%= page.tag %></h1>
+    <% 
+      var current_lang = get_current_lang()
+      var filtered_posts = filter_posts_by_lang(page.posts, current_lang)
+    %>
     <% if (page.tag) { %>
-      <p class="tag-count">共 <%= page.posts.length %> 篇文章</p>
+      <p class="tag-count">共 <%= filtered_posts.length %> 篇文章</p>
     <% } %>
   </div>
 
   <ul class="post-list">
     <% var year = 0 %>
     <% var change = false %>
-    <% page.posts.sort('date', 'desc').each(function(post) { %>
+    <% filtered_posts.sort('date', 'desc').each(function(post) { %>
       <% var itemYear = date(post.date, 'YYYY') %>
       <% change = year !== itemYear %>
       <% year = change ? itemYear : year %>

@@ -43,10 +43,11 @@
   <% } %>
   <ul class="post-list">
     <% var field_sort = theme.posts_overview.sort_updated ? 'updated' : 'date' %>
+    <% var current_lang = get_current_lang() %>
     <% if (theme.posts_overview.show_all_posts) { %>
-      <% var show_posts = page.posts.sort(field_sort, 'desc') %>
+      <% var show_posts = filter_posts_by_lang(page.posts, current_lang).sort(field_sort, 'desc') %>
     <% } else { %>
-      <% var show_posts = site.posts.sort(field_sort, 'desc').limit(theme.posts_overview.post_count || 5) %>
+      <% var show_posts = filter_posts_by_lang(site.posts, current_lang).sort(field_sort, 'desc').limit(theme.posts_overview.post_count || 5) %>
     <% } %>
     <% show_posts.each(function(post, i){ %>
       <li class="post-item">
