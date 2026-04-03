@@ -2,8 +2,36 @@
  * Filter posts by language
  * @description Filter posts based on current language context
  */
+// Make it chainable like Hexo posts object
+function makeChainable(arr) {
+  arr.each = function(callback) {
+    this.forEach(callback);
+    return this;
+  };
+  arr.sort = function(field, order) {
+    var sorted = this.slice();
+    sorted.sort(function(a, b) {
+      var valA = a[field] || '';
+      var valB = b[field] || '';
+      if (order === 'desc') {
+        return valA < valB ? 1 : -1;
+      }
+      return valA > valB ? 1 : -1;
+    });
+    return makeChainable(sorted);
+  };
+  arr.limit = function(count) {
+    return makeChainable(this.slice(0, count));
+  };
+  return arr;
+}
+
 hexo.extend.helper.register("filter_posts_by_lang", function (posts, lang) {
   var result = [];
+  
+  if (!posts || !posts.forEach) {
+    return makeChainable(result);
+  }
   
   posts.forEach(function(post) {
     var postPath = post.path || '';
@@ -17,30 +45,6 @@ hexo.extend.helper.register("filter_posts_by_lang", function (posts, lang) {
       if (!hasZhPath) result.push(post);
     }
   });
-  
-  // Make it chainable like Hexo posts object
-  function makeChainable(arr) {
-    arr.each = function(callback) {
-      this.forEach(callback);
-      return this;
-    };
-    arr.sort = function(field, order) {
-      var sorted = this.slice();
-      sorted.sort(function(a, b) {
-        var valA = a[field] || '';
-        var valB = b[field] || '';
-        if (order === 'desc') {
-          return valA < valB ? 1 : -1;
-        }
-        return valA > valB ? 1 : -1;
-      });
-      return makeChainable(sorted);
-    };
-    arr.limit = function(count) {
-      return makeChainable(this.slice(0, count));
-    };
-    return arr;
-  }
   
   return makeChainable(result);
 });
