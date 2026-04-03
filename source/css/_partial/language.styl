@@ -1,0 +1,23 @@
+// 语言切换器样式
+.language-switcher
+  display: inline-block
+  margin: 0
+
+  .lang-link
+    color: var(--color-meta, #908d8d)
+    text-decoration: underline
+    font-size: inherit
+    transition: color 0.2s ease
+    
+    &:hover
+      color: var(--color-link, rgba(212, 128, 170, 1))
+      background: transparent
+
+// 在 footer 中显示
+#footer
+  .language-switcher
+    margin: 0
+    font-size: 12px  // 与 footer 文字大小一致
+    
+    .lang-link
+      font-size: 12px

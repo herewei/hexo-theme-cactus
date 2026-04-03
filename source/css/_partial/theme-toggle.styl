@@ -1,0 +1,58 @@
+// 主题切换按钮样式
+.theme-toggle-wrapper
+  display: inline-block
+
+#theme-toggle
+  display: inline-flex
+  align-items: center
+  gap: 0.3rem
+  padding: 0
+  background: transparent
+  border: none
+  color: var(--color-meta, #908d8d)
+  cursor: pointer
+  font-size: inherit
+  font-family: inherit
+  transition: color 0.2s ease
+  
+  &:hover
+    color: var(--color-link, rgba(212, 128, 170, 1))
+    background: transparent
+  
+  &:focus
+    outline: none
+  
+  i
+    font-size: 1em
+  
+  .theme-text
+    font-size: 1em
+    text-decoration: underline
+
+// 在 footer 中显示
+#footer
+  .theme-toggle-wrapper
+    margin: 0
+    
+  #theme-toggle
+    font-size: 12px  // 与 footer 文字大小一致
+    
+    .theme-text
+      text-decoration: underline  // 与 footer 链接样式一致
+
+// 在移动端菜单中显示
+#footer-post
+  #theme-toggle
+    padding: 0.4rem 0.8rem
+    font-size: 0.9rem
+    border: 1px solid var(--color-border, #908d8d)
+    border-radius: 4px
+    
+    .theme-text
+      display: inline
+
+// 在移动端 actions-footer 中的样式
+#actions-footer
+  .theme-toggle-container
+    margin: 0
+    padding: 0 0.5rem

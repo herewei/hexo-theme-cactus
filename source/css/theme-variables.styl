@@ -1,0 +1,71 @@
+// 主题变量定义
+// 使用 CSS 自定义属性实现主题切换
+
+// 暗色主题（默认）
+:root
+  // 主要颜色
+  --color-background: #1d1f21
+  --color-background-code: lighten(#1d1f21, 2%)
+  --color-text: #c9cacc
+  --color-border: #908d8d
+  --color-link: rgba(212, 128, 170, 1)
+  
+  // 辅助颜色
+  --color-accent-1: #2bbc8a
+  --color-accent-2: #eeeeee
+  --color-accent-3: #cccccc
+  --color-meta: #908d8d
+  --color-meta-code: #908d8d
+  --color-meta-code-hover: lighten(#908d8d, 20%)
+  --color-quote: #ccffb6
+  --color-scrollbar: #999
+  --color-scrollbar-hover: lighten(#999, 20%)
+  --color-scrollbar-active: lighten(#999, 30%)
+  
+  // Footer 渐变
+  --color-footer-mobile-1: lighten(#1d1f21, 2%)
+  --color-footer-mobile-2: lighten(#1d1f21, 10%)
+
+// 明亮主题
+[data-theme="light"]
+  --color-background: #e2e0de
+  --color-background-code: darken(#e2e0de, 2%)
+  --color-text: #363533
+  --color-border: #666
+  --color-link: rgba(43, 188, 138, 1)
+  
+  --color-accent-1: #d44375
+  --color-accent-2: #111111
+  --color-accent-3: #666666
+  --color-meta: #666
+  --color-meta-code: lighten(#666, 10%)
+  --color-meta-code-hover: lighten(#666, 30%)
+  --color-quote: #ab2251
+  --color-scrollbar: #999
+  --color-scrollbar-hover: darken(#999, 20%)
+  --color-scrollbar-active: darken(#999, 30%)
+  
+  --color-footer-mobile-1: darken(#e2e0de, 2%)
+  --color-footer-mobile-2: darken(#e2e0de, 10%)
+
+// 暗色主题（显式声明）
+[data-theme="dark"]
+  --color-background: #1d1f21
+  --color-background-code: lighten(#1d1f21, 2%)
+  --color-text: #c9cacc
+  --color-border: #908d8d
+  --color-link: rgba(212, 128, 170, 1)
+  
+  --color-accent-1: #2bbc8a
+  --color-accent-2: #eeeeee
+  --color-accent-3: #cccccc
+  --color-meta: #908d8d
+  --color-meta-code: #908d8d
+  --color-meta-code-hover: lighten(#908d8d, 20%)
+  --color-quote: #ccffb6
+  --color-scrollbar: #999
+  --color-scrollbar-hover: lighten(#999, 20%)
+  --color-scrollbar-active: lighten(#999, 30%)
+  
+  --color-footer-mobile-1: lighten(#1d1f21, 2%)
+  --color-footer-mobile-2: lighten(#1d1f21, 10%)

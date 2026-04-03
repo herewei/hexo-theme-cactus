@@ -1,0 +1,24 @@
+<div class="language-switcher">
+  <% 
+    var currentPath = page.path || '';
+
+    // 判断当前语言：路径以 zh/ 开头为中文，否则为英文（默认）
+    var currentLang = currentPath.indexOf('zh/') === 0 ? 'zh' : 'en';
+    var alternateLang = currentLang === 'en' ? 'zh' : 'en';
+    var alternateLangName = alternateLang === 'en' ? 'EN' : '中';
+    
+    // 计算切换路径
+    var alternatePath;
+    if (currentLang === 'zh') {
+      // 当前是中文，移除 zh/ 前缀
+      alternatePath = currentPath.substring(3);
+    } else {
+      // 当前是英文，添加 zh/ 前缀
+      alternatePath = 'zh/' + currentPath;
+    }
+  %>
+  
+  <a href="<%= url_for(alternatePath) %>" class="lang-link" title="<%= __('theme.toggle') %>">
+    <%= alternateLangName %>
+  </a>
+</div>

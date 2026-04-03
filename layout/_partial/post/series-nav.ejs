@@ -1,0 +1,52 @@
+<%
+/**
+ * 系列文章导航组件
+ * 显示同分类内的上一篇文章和下一篇文章
+ */
+const categories = page.categories.toArray();
+if (categories.length > 0) {
+  const category = categories[0].name;
+  // 获取同分类的所有文章
+  const postsInCategory = site.posts.filter(post => {
+    const postCategories = post.categories.toArray();
+    return postCategories.some(cat => cat.name === category);
+  }).sort((a, b) => {
+    // 按 series_order 排序，然后按日期
+    const orderA = a.series_order || 0;
+    const orderB = b.series_order || 0;
+    if (orderA !== orderB) return orderA - orderB;
+    return a.date - b.date;
+  });
+
+  // 如果同分类有超过1篇文章，才显示导航
+  if (postsInCategory.length > 1) {
+    let currentIndex = -1;
+    for (let i = 0; i < postsInCategory.length; i++) {
+      if (postsInCategory.eq(i)._id === page._id) {
+        currentIndex = i;
+        break;
+      }
+    }
+    const prevPost = currentIndex > 0 ? postsInCategory.eq(currentIndex - 1) : null;
+    const nextPost = currentIndex >= 0 && currentIndex < postsInCategory.length - 1 ? postsInCategory.eq(currentIndex + 1) : null;
+%>
+<% if (prevPost || nextPost) { %>
+<div class="series-navigation">
+  <h3 class="series-title">📚 系列文章</h3>
+  <div class="series-nav">
+    <% if (prevPost) { %>
+    <a class="series-nav-prev" href="<%= url_for(prevPost.path) %>">
+      <span class="nav-label">← 上一篇</span>
+      <span class="nav-title"><%= prevPost.title %></span>
+    </a>
+    <% } %>
+    <% if (nextPost) { %>
+    <a class="series-nav-next" href="<%= url_for(nextPost.path) %>">
+      <span class="nav-label">下一篇 →</span>
+      <span class="nav-title"><%= nextPost.title %></span>
+    </a>
+    <% } %>
+  </div>
+</div>
+<% } %>
+<% } } %>

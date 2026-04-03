@@ -1,0 +1,37 @@
+<%
+/**
+ * 同系列文章列表组件
+ * 显示当前文章所属系列的所有文章
+ */
+const categories = page.categories.toArray();
+if (categories.length > 0) {
+  const category = categories[0].name;
+  // 获取同分类的所有文章
+  const postsInCategory = site.posts.filter(post => {
+    const postCategories = post.categories.toArray();
+    return postCategories.some(cat => cat.name === category);
+  }).sort((a, b) => {
+    // 按 series_order 排序，然后按日期
+    const orderA = a.series_order || 0;
+    const orderB = b.series_order || 0;
+    if (orderA !== orderB) return orderA - orderB;
+    return a.date - b.date;
+  });
+
+  // 如果同分类有超过1篇文章，才显示列表
+  if (postsInCategory.length > 1) {
+%>
+<div class="series-list">
+  <h3 class="series-list-title">📖 本系列文章</h3>
+  <ul class="series-list-items">
+    <% postsInCategory.forEach((post, index) => { %>
+    <li class="series-list-item <%= post._id === page._id ? 'active' : '' %>">
+      <span class="series-order"><%= index + 1 %>.</span>
+      <a href="<%= url_for(post.path) %>" class="series-link">
+        <%= post.title %>
+      </a>
+    </li>
+    <% }); %>
+  </ul>
+</div>
+<% } } %>
